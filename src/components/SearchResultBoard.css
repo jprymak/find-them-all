@@ -1,0 +1,7 @@
+.SearchResultBoard{
+    display: flex;
+    width: 100%;
+    min-height: 400px;
+    background: lightgreen;
+    margin: 16px;
+}

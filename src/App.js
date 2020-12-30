@@ -6,10 +6,10 @@ import SearchResultBoard from './components/SearchResultBoard';
 function App() {
   return (
     <div className="App">
-      <React.Fragment>
+ 
         <SearchBar/>
         <SearchResultBoard/>
-      </React.Fragment>
+
     </div>
   );
 }

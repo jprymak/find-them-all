@@ -9,13 +9,14 @@ class App extends React.Component {
     super();
     this.state = {
       foundPokemons: [],
+      hasError: false
     };
   }
 
   handleSearch = (e) =>{
     if(e.key==="Enter"){
       
-      fetch(`https://pokeapi.co/api/v2/pokemon/${e.target.value}`).then(response=>{
+      fetch(`https://pokeapi.co/api/v2/pokemon/${e.target.value.toLowerCase()}`).then(response=>{
         return response.json();
       }).then(data=>{
         console.log(data)
@@ -27,15 +28,18 @@ class App extends React.Component {
         };
 
         this.setState((prevState)=>({foundPokemons: [...prevState.foundPokemons, newPokemon]}))
-        console.log(this.state.foundPokemons)
-      }).catch(()=>console.log("Could not find a pokemon with specified name"))
+        this.setState({hasError: false})
+      })
+      .catch(
+        ()=>this.setState({hasError: true})
+        )
     }
   }
 
   render(){
     return (
       <div className="App">
-          <SearchBar onConfirm={this.handleSearch}/>
+          <SearchBar hasError={this.state.hasError} onConfirm={this.handleSearch}/>
           <SearchResultBoard pokemons={this.state.foundPokemons}/>
       </div>
     );

@@ -1,5 +1,7 @@
 .App{
-  background: lightgray;
+  background: rgb(218, 221, 218);
+  margin:16px;
+  border-radius: 12px;
   height: 100vh;
   display: flex;
   flex-direction: column;

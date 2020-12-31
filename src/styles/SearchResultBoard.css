@@ -1,7 +1,8 @@
 .SearchResultBoard{
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
-    min-height: 400px;
-    background: lightgreen;
+    height: 100vh;
+    background: rgb(218, 221, 218);
     margin: 16px;
 }

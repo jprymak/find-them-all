@@ -21,8 +21,8 @@ class App extends React.Component {
         console.log(data)
         const newPokemon = {
           id: uuidv4(),
-          name: data.name,
-          type: data.types[0].type.name,
+          name: data.name[0].toUpperCase() +  data.name.slice(1),
+          type: data.types[0].type.name[0].toUpperCase() + data.types[0].type.name.slice(1),
           imageURL: data.sprites.front_default
         };
 

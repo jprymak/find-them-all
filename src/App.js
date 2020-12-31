@@ -6,10 +6,8 @@ import SearchResultBoard from './components/SearchResultBoard';
 function App() {
   return (
     <div className="App">
- 
         <SearchBar/>
         <SearchResultBoard/>
-
     </div>
   );
 }

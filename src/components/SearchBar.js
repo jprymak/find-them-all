@@ -1,8 +1,9 @@
 import React from "react";
 
-function SearchBar(){
+function SearchBar({onConfirm}){
+    
     return(
-        <input type="text" placeholder="Find them all!"/>
+        <input onKeyDown={onConfirm} type="text" placeholder="Find them all!"/>
     )
 }
 

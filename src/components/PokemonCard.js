@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/PokemonCard.css';
 
 function PokemonCard(props){
     const {imageURL, name, type} = props;

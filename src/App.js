@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   handleSearch = (e) =>{
-    if(e.key==="Enter"){
+    if(e.key==="Enter" && e.target.value!==""){
       
       fetch(`https://pokeapi.co/api/v2/pokemon/${e.target.value.toLowerCase()}`).then(response=>{
         return response.json();
@@ -33,7 +33,9 @@ class App extends React.Component {
       .catch(
         ()=>this.setState({hasError: true})
         )
+e.target.value="";
     }
+    
   }
 
   render(){

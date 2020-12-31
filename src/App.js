@@ -2,6 +2,7 @@ import './App.css';
 import SearchBar from "./components/SearchBar";
 import React from "react";
 import SearchResultBoard from './components/SearchResultBoard';
+import { v4 as uuidv4 } from 'uuid';
 
 class App extends React.Component {
   constructor(){
@@ -18,7 +19,9 @@ class App extends React.Component {
         return response.json();
       }).then(data=>{
         console.log(data)
-        const newPokemon = {name: data.name,
+        const newPokemon = {
+          id: uuidv4(),
+          name: data.name,
           type: data.types[0].type.name,
           imageURL: data.sprites.front_default
         };
@@ -33,7 +36,7 @@ class App extends React.Component {
     return (
       <div className="App">
           <SearchBar onConfirm={this.handleSearch}/>
-          <SearchResultBoard/>
+          <SearchResultBoard pokemons={this.state.foundPokemons}/>
       </div>
     );
   }

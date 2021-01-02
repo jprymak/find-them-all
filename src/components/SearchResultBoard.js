@@ -5,11 +5,11 @@ import React from "react"
 
 
 function SearchResultBoard(props){
-    const {pokemons} = props;
+    const {pokemons, onPokemonSave} = props;
     return(
         <div className="SearchResultBoard">
             {pokemons.map(pokemon=>{
-                return <PokemonCard key={pokemon.id} imageURL={pokemon.imageURL} name={pokemon.name} type={pokemon.type}/>
+                return <PokemonCard onPokemonSave={onPokemonSave} key={pokemon.id} imageURL={pokemon.imageURL} name={pokemon.name} type={pokemon.type}/>
             })}
         </div>
     )

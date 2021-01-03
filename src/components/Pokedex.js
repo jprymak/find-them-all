@@ -19,7 +19,7 @@ function Pokedex(props) {
       </ul>
 
       <button onClick={onPokedexButtonClick} className="Pokedex__button">
-        {isPokedexOpen ? "Hide Pokedex" : "Show Pokedex"}
+        {isPokedexOpen ? "<" : ">"}
       </button>
     </div>
   );

@@ -5,7 +5,8 @@ function Pokedex(props) {
   const { isPokedexOpen, onPokedexButtonClick, pokedex } = props;
   return (
     <div className={`Pokedex ${isPokedexOpen ? "" : "Pokedex--hidden"}`}>
-      <ul>
+      <h2 className="Pokedex__header">Pokedex</h2>
+      <ul className="Pokedex__list">
         {isPokedexOpen
           ? pokedex.map((pokemon) => {
               return (

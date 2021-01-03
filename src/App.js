@@ -5,7 +5,6 @@ import SearchBar from "./components/SearchBar";
 import React from "react";
 import SearchResultBoard from "./components/SearchResultBoard";
 import Pokedex from "./components/Pokedex";
-import { v4 as uuidv4 } from "uuid";
 
 class App extends React.Component {
   constructor() {

@@ -16,15 +16,13 @@ class App extends React.Component {
       hasError: false,
       isPokemonFound: false,
       isPokemonInPokedex: false,
-      isPokedexOpen: false
+      isPokedexOpen: false,
     };
   }
 
-
   handlePokedexButtonClick = () => {
-    this.setState({isPokedexOpen: !this.state.isPokedexOpen})
-  }
-
+    this.setState({ isPokedexOpen: !this.state.isPokedexOpen });
+  };
 
   handlePokemonSave = (pokemonName) => {
     const filteredPokemons = this.state.foundPokemons.filter((pokemon) => {
@@ -93,7 +91,7 @@ class App extends React.Component {
         .then((data) => {
           console.log(data);
           const newPokemon = {
-            id: uuidv4(),
+            id: data.id,
             name: data.name[0].toUpperCase() + data.name.slice(1),
             type:
               data.types[0].type.name[0].toUpperCase() +
@@ -136,19 +134,24 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Pokedex isPokedexOpen={this.state.isPokedexOpen} onPokedexButtonClick={this.handlePokedexButtonClick} pokedex={this.state.pokedex} className="Pokedex Pokedex--small"/>
-      <div className="SearchModule SearchModule--large">
-        <SearchBar
-          isPokemonFound={this.state.isPokemonFound}
-          isPokemonInPokedex={this.state.isPokemonInPokedex}
-          hasError={this.state.hasError}
-          onConfirm={this.handleSearch}
+        <Pokedex
+          isPokedexOpen={this.state.isPokedexOpen}
+          onPokedexButtonClick={this.handlePokedexButtonClick}
+          pokedex={this.state.pokedex}
+          className="Pokedex Pokedex--small"
         />
-        <SearchResultBoard
-          pokemons={this.state.foundPokemons}
-          onPokemonSave={this.handlePokemonSave}
-        />
-      </div>
+        <div className="SearchModule SearchModule--large">
+          <SearchBar
+            isPokemonFound={this.state.isPokemonFound}
+            isPokemonInPokedex={this.state.isPokemonInPokedex}
+            hasError={this.state.hasError}
+            onConfirm={this.handleSearch}
+          />
+          <SearchResultBoard
+            pokemons={this.state.foundPokemons}
+            onPokemonSave={this.handlePokemonSave}
+          />
+        </div>
       </div>
     );
   }

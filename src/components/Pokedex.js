@@ -9,7 +9,7 @@ function Pokedex(props) {
     >
         {isPokedexOpen ? 
         (pokedex.map((pokemon)=>{
-            return <p key={pokemon.id}>{pokemon.name}</p>
+            return <p key={pokemon.id}>#{pokemon.id} - {pokemon.name}</p>
         })) : ""}
       <button onClick={onPokedexButtonClick} class="Pokedex__button">
         {isPokedexOpen ? "Hide Pokedex" : "Show Pokedex"}

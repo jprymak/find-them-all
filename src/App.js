@@ -66,9 +66,18 @@ class App extends React.Component {
       return pokemon.name !== pokemonToRemove.name;
     });
     this.setState({ foundPokemons: filteredPokemons }, function () {
-      // console.log(`Found Pokemons`, this.state.foundPokemons);
+      // console.log(`Found Pokemons`, this.state.foundPokemons);\
+      this.sortPokedex();
     });
   };
+
+  sortPokedex = () => {
+    const sortedPokedex = this.state.pokedex.sort((a, b) => {
+      return a.id - b.id;
+    });
+    this.setState({ pokedex: sortedPokedex });
+  };
+
 
   handleSearch = (e) => {
     if (e.key !== "Enter" || e.target.value === "") return;

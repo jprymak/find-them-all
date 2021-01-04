@@ -44,7 +44,7 @@ class App extends React.Component {
     const input = RegExp(searchedName, "i");
     let isPokemonPresent = false;
     for (let i = 0; i < array.length; i++) {
-      if (input.test(array[i].name)) {
+      if (input.test(array[i].name)||input.test(array[i].id)) {
         isPokemonPresent = true;
         break;
       }

@@ -1,32 +1,43 @@
-.pokemon-card{
-    background: white;
-    margin: 8px;
-    border-radius:12px;
-    padding: 8px;
-    max-height: 220px;
-    min-width: 160px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 5px 5px 5px 0px rgb(188, 209, 171);
+.pokemon-card {
+  background: white;
+  margin: 8px;
+  border-radius: 12px;
+  padding: 8px;
+  max-height: 220px;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 5px 5px 0px rgb(188, 209, 171);
 }
 
-.pokemon-card__name{
-    margin:4px 0 8px 0;
-    font-size: 18px;
-    font-weight: bold;
+.pokemon-card__name {
+  margin: 4px 0 8px 0;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.pokemon-card__type{
-    margin:0 0 24px 0;
-    color: rgb(110, 110, 228);
+.pokemon-card__type {
+  margin: 0 0 24px 0;
+  color: rgb(110, 110, 228);
 }
 
-.pokemon-card__save-button{
-    border-radius: 12px;
-    color:rgb(255, 255, 255);
-    background:rgb(110, 110, 228);
-    padding: 8px;
-    border:none;
-    cursor: pointer;
+.pokemon-card__save-button {
+  border-radius: 12px;
+  color: rgb(255, 255, 255);
+  background: rgb(110, 110, 228);
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .pokemon-card {
+    transform: scale(0.85);
+    margin: 0px;
+  }
+  .pokemon-card__type {
+    margin: 0 0 16px 0;
+  }
 }

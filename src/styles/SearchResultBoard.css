@@ -1,8 +1,15 @@
 .SearchResultBoard{
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    height: 100vh;
+    justify-content: center;
+    height: auto;
     background: rgb(218, 221, 218);
-    margin: 16px;
+    padding: 8px;
 }
+
+@media screen and (max-width: 768px) {
+    .SearchResultBoard{
+        
+    }
+  }
+  

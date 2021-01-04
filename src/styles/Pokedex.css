@@ -3,7 +3,6 @@
   background: rgb(245, 64, 64);
   position: relative;
   transition: 1s ease;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 8px;

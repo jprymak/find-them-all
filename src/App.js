@@ -30,7 +30,7 @@ class App extends React.Component {
     const currentPokemon = filteredPokemons[0];
 
     if (
-      !this.searchForNameInArrayOfObjects(
+      !this.checkIfArrayIncludesObjectWithCertainKeyValue(
         this.state.pokedex,
         currentPokemon.name
       )
@@ -40,16 +40,16 @@ class App extends React.Component {
     }
   };
 
-  searchForNameInArrayOfObjects = (array, searchedItem) => {
-    const regex = new RegExp(`^${searchedItem}$`, "i")
-    let isPokemonPresent = false;
+  checkIfArrayIncludesObjectWithCertainKeyValue = (array, keyValue) => {
+    const regex = new RegExp(`^${keyValue}$`, "i")
+    let includes = false;
     for (let i = 0; i < array.length; i++) {
       if (array[i].name.match(regex)!==null||regex.test(array[i].id)) {
-        isPokemonPresent = true;
+        includes = true;
         break;
       }
     }
-    return isPokemonPresent;
+    return includes;
   };
 
   savePokemonInPokedex = (pokemonToSave) => {
@@ -82,11 +82,11 @@ class App extends React.Component {
   handleSearch = (e) => {
     if (e.key !== "Enter" || e.target.value === "") return;
     const searchedName = e.target.value;
-    const isPokemonInPokedex = this.searchForNameInArrayOfObjects(
+    const isPokemonInPokedex = this.checkIfArrayIncludesObjectWithCertainKeyValue(
       this.state.pokedex,
       searchedName
     );
-    const isPokemonInResultBoard = this.searchForNameInArrayOfObjects(
+    const isPokemonInResultBoard = this.checkIfArrayIncludesObjectWithCertainKeyValue(
       this.state.foundPokemons,
       searchedName
     );

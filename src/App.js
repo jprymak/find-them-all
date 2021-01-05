@@ -40,11 +40,11 @@ class App extends React.Component {
     }
   };
 
-  searchForNameInArrayOfObjects = (array, searchedName) => {
-    const input = RegExp(searchedName, "i");
+  searchForNameInArrayOfObjects = (array, searchedItem) => {
+    const regex = new RegExp(`^${searchedItem}$`, "i")
     let isPokemonPresent = false;
     for (let i = 0; i < array.length; i++) {
-      if (input.test(array[i].name)||input.test(array[i].id)) {
+      if (array[i].name.match(regex)!==null||regex.test(array[i].id)) {
         isPokemonPresent = true;
         break;
       }

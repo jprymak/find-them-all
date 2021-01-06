@@ -66,7 +66,7 @@ class App extends React.Component {
       return pokemon.name !== pokemonToRemove.name;
     });
     this.setState({ foundPokemons: filteredPokemons }, function () {
-      // console.log(`Found Pokemons`, this.state.foundPokemons);\
+      // console.log(`Found Pokemons`, this.state.foundPokemons);
       this.sortPokedex();
     });
   };
@@ -78,6 +78,17 @@ class App extends React.Component {
     this.setState({ pokedex: sortedPokedex });
   };
 
+  getPokemonTypes=(types)=>{
+    let typeNames = "";
+    types.forEach(obj=>{
+      typeNames=typeNames + obj.type.name[0].toUpperCase() + obj.type.name.slice(1)
+      if(types.indexOf(obj)!==types.length-1){
+        typeNames+="/"
+      }
+    })
+    
+    return typeNames;
+  }
 
   handleSearch = (e) => {
     if (e.key !== "Enter" || e.target.value === "") return;
@@ -101,9 +112,7 @@ class App extends React.Component {
           const newPokemon = {
             id: data.id,
             name: data.name[0].toUpperCase() + data.name.slice(1),
-            type:
-              data.types[0].type.name[0].toUpperCase() +
-              data.types[0].type.name.slice(1),
+            type: this.getPokemonTypes(data.types),
             imageURL: data.sprites.front_default,
           };
 

@@ -6,6 +6,7 @@ import React from "react";
 import SearchResultBoard from "./components/SearchResultBoard";
 import Pokedex from "./components/Pokedex";
 
+let post;
 class App extends React.Component {
   constructor() {
     super();
@@ -41,10 +42,10 @@ class App extends React.Component {
   };
 
   checkIfArrayIncludesObjectWithCertainKeyValue = (array, keyValue) => {
-    const regex = new RegExp(`^${keyValue}$`, "i")
+    const regex = new RegExp(`^${keyValue}$`, "i");
     let includes = false;
     for (let i = 0; i < array.length; i++) {
-      if (array[i].name.match(regex)!==null||regex.test(array[i].id)) {
+      if (array[i].name.match(regex) !== null || regex.test(array[i].id)) {
         includes = true;
         break;
       }
@@ -78,17 +79,29 @@ class App extends React.Component {
     this.setState({ pokedex: sortedPokedex });
   };
 
-  getPokemonTypes=(types)=>{
+  getPokemonTypes = (types) => {
     let typeNames = "";
-    types.forEach(obj=>{
-      typeNames=typeNames + obj.type.name[0].toUpperCase() + obj.type.name.slice(1)
-      if(types.indexOf(obj)!==types.length-1){
-        typeNames+="/"
+    types.forEach((obj) => {
+      typeNames =
+        typeNames + obj.type.name[0].toUpperCase() + obj.type.name.slice(1);
+      if (types.indexOf(obj) !== types.length - 1) {
+        typeNames += "/";
       }
-    })
-    
+    });
+
     return typeNames;
-  }
+  };
+
+  getPokemonAbilities = (abilities) => {
+    const promiseArray = [];
+
+    abilities.forEach((obj) => {
+      promiseArray.push(fetch(obj.ability.url));
+    });
+    console.log(promiseArray);
+
+    return promiseArray;
+  };
 
   handleSearch = (e) => {
     if (e.key !== "Enter" || e.target.value === "") return;
@@ -108,14 +121,41 @@ class App extends React.Component {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
-          const newPokemon = {
-            id: data.id,
-            name: data.name[0].toUpperCase() + data.name.slice(1),
-            type: this.getPokemonTypes(data.types),
-            imageURL: data.sprites.front_default,
-          };
+          post = data;
 
+          return Promise.all(this.getPokemonAbilities(data.abilities));
+        })
+        .then((responses) => {
+          return Promise.all(
+            responses.map(function (response) {
+              return response.json();
+            })
+          );
+        })
+        .then((data) => {
+          const abilitiesArray = [];
+
+          const newPokemon = {
+            id: post.id,
+            name: post.name[0].toUpperCase() + post.name.slice(1),
+            type: this.getPokemonTypes(post.types),
+            imageURL: post.sprites.front_default,
+          };
+          data.forEach((obj) => {
+            const name = obj.name;
+            let description = "";
+            for (let i = 0; i < obj.effect_entries.length; i++) {
+              if (obj.effect_entries[i].language.name === "en") {
+                description = obj.effect_entries[i].effect;
+                break;
+              }
+            }
+            const ability = { name, description };
+            abilitiesArray.push(ability);
+          });
+          newPokemon.abilities = abilitiesArray;
+
+          console.log(data);
           this.setState((prevState) => ({
             foundPokemons: [...prevState.foundPokemons, newPokemon],
           }));

@@ -9,7 +9,7 @@ function SearchResultBoard(props){
     return(
         <div className="SearchResultBoard">
             {pokemons.map(pokemon=>{
-                return <PokemonCard onPokemonSave={onPokemonSave} key={pokemon.id} imageURL={pokemon.imageURL} name={pokemon.name} type={pokemon.type}/>
+                return <PokemonCard onPokemonSave={onPokemonSave} key={pokemon.id} imageURL={pokemon.imageURL} name={pokemon.name} type={pokemon.type} abilities={pokemon.abilities}/>
             })}
         </div>
     )

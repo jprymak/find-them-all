@@ -17,8 +17,10 @@ class App extends React.Component {
       isPokemonFound: false,
       isPokemonInPokedex: false,
       isPokedexOpen: false,
+      isFetchingData: false
     };
   }
+
 
   handlePokedexButtonClick = () => {
     this.setState({ isPokedexOpen: !this.state.isPokedexOpen });
@@ -104,7 +106,7 @@ class App extends React.Component {
   };
 
   handleSearch = (e) => {
-    if (e.key !== "Enter" || e.target.value === "") return;
+    if (e.key !== "Enter" || e.target.value === "" || this.state.isFetchingData=== true) return;
     const searchedName = e.target.value;
     const isPokemonInPokedex = this.checkIfArrayIncludesObjectWithCertainKeyValue(
       this.state.pokedex,
@@ -116,6 +118,7 @@ class App extends React.Component {
     );
 
     if (isPokemonInPokedex === false && isPokemonInResultBoard === false) {
+      this.setState({isFetchingData: true})
       fetch(`https://pokeapi.co/api/v2/pokemon/${e.target.value.toLowerCase()}`)
         .then((response) => {
           return response.json();
@@ -159,12 +162,14 @@ class App extends React.Component {
           this.setState((prevState) => ({
             foundPokemons: [...prevState.foundPokemons, newPokemon],
           }));
+          this.setState({isFetchingData: false})
           this.setState({ hasError: false });
           this.setState({ isPokemonFound: false });
           this.setState({ isPokemonInPokedex: false });
         })
         .catch(() =>
           this.setState({
+            isFetchingData: false,
             hasError: true,
             isPokemonFound: false,
             isPokemonInPokedex: false,

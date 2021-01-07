@@ -1,9 +1,10 @@
 .pokemon-card {
   background: white;
+  position:relative;
   margin: 8px;
   border-radius: 12px;
   padding: 8px;
-  max-height: 220px;
+  min-height: 280px;
   min-width: 160px;
   display: flex;
   flex-direction: column;
@@ -12,17 +13,19 @@
 }
 
 .pokemon-card__name {
-  margin: 4px 0 8px 0;
+  margin: 4px 0 4px 0;
   font-size: 18px;
   font-weight: bold;
 }
 
 .pokemon-card__type {
-  margin: 0 0 24px 0;
+  margin: 0 0 10px 0;
   color: rgb(110, 110, 228);
 }
 
 .pokemon-card__save-button {
+  position:absolute;
+  bottom: 2px;
   border-radius: 12px;
   color: rgb(255, 255, 255);
   background: rgb(110, 110, 228);
@@ -32,12 +35,36 @@
   margin-bottom: 8px;
 }
 
+.pokemon-card__abilities {
+  
+  font-weight: bold;
+  margin:0 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  list-style-position: outside;
+  /* list-style-image: none; */
+  padding: 4px;
+}
+
+.pokemon-card__ability {
+  font-weight:normal;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.pokemon-card__ability:hover {
+  color: rgb(79, 156, 204);
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .pokemon-card {
     transform: scale(0.85);
     margin: 0px;
   }
   .pokemon-card__type {
-    margin: 0 0 16px 0;
+    margin: 0 0 8px 0;
   }
 }

@@ -11,7 +11,7 @@ function Pokedex(props) {
           ? pokedex.map((pokemon) => {
               return (
                 <li className="Pokedex__list-item" key={pokemon.id}>
-                  #{pokemon.id} - {pokemon.name}
+                  #{pokemon.id} - {pokemon.name} <button className="Pokedex__choose-button">{'>>'}</button>
                 </li>
               );
             })

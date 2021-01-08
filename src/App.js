@@ -17,10 +17,32 @@ class App extends React.Component {
       isPokemonFound: false,
       isPokemonInPokedex: false,
       isPokedexOpen: false,
-      isFetchingData: false
+      isFetchingData: false,
     };
   }
 
+  handlePokedexChooseItemButtonClick = (pokemonId) => {
+    this.showPokemonInView(pokemonId);
+  };
+
+  showPokemonInView = (pokemonId) => {
+    const pokemonToShow = this.state.pokedex.find(
+      (pokemon) => pokemon.id === pokemonId
+    );
+
+    this.setState((prevState) => {
+      const pokedex = prevState.pokedex.filter(
+        (pokemon) => pokemon !== pokemonToShow
+      );
+      return {pokedex}
+    });
+
+    this.setState((prevState) => {
+      const foundPokemons = [...prevState.foundPokemons, pokemonToShow ]
+      return {foundPokemons}
+    });
+    
+  };
 
   handlePokedexButtonClick = () => {
     this.setState({ isPokedexOpen: !this.state.isPokedexOpen });
@@ -106,7 +128,12 @@ class App extends React.Component {
   };
 
   handleSearch = (e) => {
-    if (e.key !== "Enter" || e.target.value === "" || this.state.isFetchingData=== true) return;
+    if (
+      e.key !== "Enter" ||
+      e.target.value === "" ||
+      this.state.isFetchingData === true
+    )
+      return;
     const searchedName = e.target.value;
     const isPokemonInPokedex = this.checkIfArrayIncludesObjectWithCertainKeyValue(
       this.state.pokedex,
@@ -118,7 +145,7 @@ class App extends React.Component {
     );
 
     if (isPokemonInPokedex === false && isPokemonInResultBoard === false) {
-      this.setState({isFetchingData: true})
+      this.setState({ isFetchingData: true });
       fetch(`https://pokeapi.co/api/v2/pokemon/${e.target.value.toLowerCase()}`)
         .then((response) => {
           return response.json();
@@ -162,7 +189,7 @@ class App extends React.Component {
           this.setState((prevState) => ({
             foundPokemons: [...prevState.foundPokemons, newPokemon],
           }));
-          this.setState({isFetchingData: false})
+          this.setState({ isFetchingData: false });
           this.setState({ hasError: false });
           this.setState({ isPokemonFound: false });
           this.setState({ isPokemonInPokedex: false });
@@ -199,6 +226,9 @@ class App extends React.Component {
         <Pokedex
           isPokedexOpen={this.state.isPokedexOpen}
           onPokedexButtonClick={this.handlePokedexButtonClick}
+          onPokedexChooseItemButtonClick={
+            this.handlePokedexChooseItemButtonClick
+          }
           pokedex={this.state.pokedex}
           className="Pokedex Pokedex--small"
         />

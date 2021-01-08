@@ -21,6 +21,13 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount(){
+    if(window.localStorage.getItem('pokedex')){
+      const savedPokedex = JSON.parse(window.localStorage.getItem("pokedex", this.state.pokedex))
+      this.setState({pokedex: savedPokedex }, ()=>{console.log(this.state)})
+    }
+  }
+
   handlePokedexChooseItemButtonClick = (pokemonId) => {
     this.showPokemonInView(pokemonId);
   };
@@ -40,7 +47,7 @@ class App extends React.Component {
     this.setState((prevState) => {
       const foundPokemons = [...prevState.foundPokemons, pokemonToShow ]
       return {foundPokemons}
-    });
+    },()=>{window.localStorage.setItem("pokedex", JSON.stringify(this.state.pokedex))});
     
   };
 
@@ -93,6 +100,7 @@ class App extends React.Component {
     this.setState({ foundPokemons: filteredPokemons }, function () {
       // console.log(`Found Pokemons`, this.state.foundPokemons);
       this.sortPokedex();
+      window.localStorage.setItem("pokedex", JSON.stringify(this.state.pokedex))
     });
   };
 
